@@ -1,14 +1,18 @@
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: "AIzaSyCI0rfcWcHCWBwz2LaJLsjQZRYy5GWhy1k",
+  authDomain: "social-media-app-90193.firebaseapp.com",
+  projectId: "social-media-app-90193",
+  storageBucket: "social-media-app-90193.appspot.com",
+  messagingSenderId: "1079332470294",
+  appId: "1:1079332470294:web:e1692051ba25a812f6ff37",
+  measurementId: "G-W2RC7S3LYL"
 };
 
-firebase.initializeApp(firebaseConfig);
-export const auth = firebase.auth();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut };
+

@@ -1,20 +1,12 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { createHttpLink } from '@apollo/client/link/http';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react';
+import App from './App'; // Assuming your main application component is named App
+import { AuthProvider } from './components/Auth/Auth'; // Import your AuthProvider
+import { createRoot } from 'react-dom/client';
 
-const httpLink = createHttpLink({
-  uri: 'YOUR_GRAPHQL_ENDPOINT',
-});
+const root = createRoot(document.getElementById('root')!);
 
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
-
-ReactDOM.render(
-  <ApolloProvider client={client}>
+root.render( <React.StrictMode>
+  <AuthProvider>
     <App />
-  </ApolloProvider>,
-  document.getElementById('root')
-);
+  </AuthProvider>
+</React.StrictMode>);

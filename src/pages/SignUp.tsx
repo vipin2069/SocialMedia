@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { auth } from './Auth';
+import { useState } from 'react';
+import { useAuth } from '../components/Auth/Auth';
 
 const SignUp = () => {
+  const { signUp } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
     const handleSignUp = async () => {
       try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        await signUp(email, password);
       } catch (error) {
         console.error('Error signing up:', error);
       }

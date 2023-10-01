@@ -10,9 +10,6 @@ export const GET_POSTS = gql`
         id
         username
       }
-      // Other fields
     }
   }
 `;
-
-// Define other queries...

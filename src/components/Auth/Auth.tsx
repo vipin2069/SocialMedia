@@ -1,5 +1,8 @@
 import {ReactNode,useState, useEffect, createContext, useContext } from 'react';
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '../../firebase'; // Import Firebase authentication
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import app from '../../firebase';
+
+const auth = getAuth(app);
 
 interface User {
   uid: string; // A unique identifier for the user
@@ -12,7 +15,11 @@ interface User {
 const AuthContext = createContext<any>(null);
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -32,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((User) => {
+    const unsubscribe = auth.onAuthStateChanged((User:any) => {
       if (User) {
         setCurrentUser(User);
         setLoading(false);

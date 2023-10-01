@@ -1,12 +1,17 @@
 import React from 'react';
-import App from './App'; // Assuming your main application component is named App
-import { AuthProvider } from './components/Auth/Auth'; // Import your AuthProvider
-import { createRoot } from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import App from './App';
 
-const root = createRoot(document.getElementById('root')!);
+const client = new ApolloClient({
+  uri: 'https://flyby-router-demo.herokuapp.com/',
+  cache: new InMemoryCache(),
+});
 
-root.render( <React.StrictMode>
-  <AuthProvider>
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
+  <ApolloProvider client={client}>
     <App />
-  </AuthProvider>
-</React.StrictMode>);
+  </ApolloProvider>,
+);

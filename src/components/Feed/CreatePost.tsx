@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_POST } from "../../graphql/mutations";
+import { CREATE_POST } from "../../graphql/queries";
 
 const CreatePost = () => {
   const [text, setText] = useState("");
